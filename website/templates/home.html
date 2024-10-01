@@ -1,1 +1,31 @@
+{%extends 'base.html' %}
+{%block title%}
+Home
+{%endblock%}
+{%block content%}
+<h2 style="text-align: center;">Attendance</h2>
+<br>
+<h4>Arrival</h4>
+<br>
+<h5>Enter the time of arrival:</h5>
+<form action="{{ url_for('attendance.mark_presence') }}" method="post">
+<div class="input-group">
+  <input name='time' type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="in hours format HH:MM">
+  <span class="input-group-text">hrs</span>
+  <button type="submit" class="btn btn-primary">Mark Presence</button>
+</div>
+</form>
+<br>
+<h4>Departure</h4>
+<br>
+<h5>Enter the time of Departure:</h5>
+<form action="{{ url_for('attendance.depart') }}" method="post">
+<div class="input-group">
+  <input name='time' type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="in hours format HH:MM">
+  <span class="input-group-text">hrs</span>
+  <button type="submit" class="btn btn-primary">Depart</button>
+</div>
+</form>
+
+{%endblock%}
 
