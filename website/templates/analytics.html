@@ -1,1 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}
+Analytics
+{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center;">Analytics</h2>
+<br>
+<div class="infoContainer">
+  <div class="studentName" style="margin: 10px;">
+    <h5>Student Name: {{ user.name }}</h5> 
+  </div>
+  <div class="daysPresent" style="margin: 10px;">
+    <h5>Days Present: {{ arrival_count }}</h5>
+  </div>
+  <div class="departures" style="margin: 10px;">
+    <h5>Departures: {{ departure_count }}</h5>
+  </div>
+  <div class="LateArrivals" style="margin: 10px;">
+    <h5>Late Arrivals: {{ late_arrival_count }}</h5>
+  </div>
+  <div class="EarlyDepartures" style="margin: 10px;">
+    <h5>Early Departures: {{ early_departure_count }}</h5>
+  </div>
+</div>
+
+<canvas id="attendanceChart" width="200" height="100"></canvas>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Assign the Jinja variables to JavaScript variables, parsing them as numbers
+    var arrival_count = parseInt("{{ arrival_count }}");
+    var late_arrival_count = parseInt("{{ late_arrival_count }}");
+    var early_departure_count = parseInt("{{ early_departure_count }}");
+    var departure_count = parseInt("{{ departure_count }}");
+
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var attendanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Arrivals', 'Late Arrivals', 'Early Departures', 'Departures'],
+            datasets: [{
+                label: 'Attendance Counts',
+                data: [
+                    arrival_count,
+                    late_arrival_count,
+                    early_departure_count,
+                    departure_count
+                ],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
 
