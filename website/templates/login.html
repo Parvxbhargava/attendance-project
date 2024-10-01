@@ -1,1 +1,20 @@
+{%extends "base.html"%}
+{%block title%}
+Login
+{%endblock%}
 
+{%block content%}
+<h1 style="text-align:center ;">Login</h1>
+<br>
+<form action="{{ url_for('auth.login') }}" method="POST">
+<h5> Registration Number </h5>
+<input name='regNo'class="form-control" type="text" placeholder="Registration No" aria-label="default input example" style="margin-bottom: 7px;">
+<h5> Password </h5>
+<input name='password' type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" style="margin-bottom: 13px;">
+
+<div class="d-grid gap-2 col-4 mx-auto" >
+  <button class="btn btn-dark" type="submit" >Login</button>
+</div>
+</form>
+
+{%endblock%}
